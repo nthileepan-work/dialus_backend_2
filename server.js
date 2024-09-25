@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 // Serve the images folder
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/dialus/api/images', express.static(path.join(__dirname, 'images')));
 
 // Email sending route
 app.post('/dialus/api/send-email', async (req, res) => {
