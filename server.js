@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
 const addsRouter = require('./Routers/addsRouter'); // Import adds router
 const { sequelize } = require('./Models/addsModel'); // Import Sequelize connection
 const path = require('path'); 
@@ -12,6 +14,8 @@ app.use(cors({
   }));
   
 app.use(express.json());
+dotenv.config(); 
+
 
 // Serve the images folder
 app.use('/dialus/api/images', express.static(path.join(__dirname, 'images')));
@@ -59,17 +63,17 @@ app.post('/dialus/api/send-email', async (req, res) => {
   })
 
 // Connect to MySQL
-sequelize.authenticate()
-    .then(() => {
-        console.log('Connected to MySQL database!');
-        return sequelize.sync();
-    })
-    .then(() => {
-        console.log('database connected sucessfully!');
-    })
-    .catch((error) => {
-        console.error('Unable to connect to the database:', error);
-    });
+// sequelize.authenticate()
+//     .then(() => {
+//         console.log('Connected to MySQL database!');
+//         return sequelize.sync();
+//     })
+//     .then(() => {
+//         console.log('database connected sucessfully!');
+//     })
+//     .catch((error) => {
+//         console.error('Unable to connect to the database:', error);
+//     });
 
 // Adds routing
 app.use('/dialus/api/adds', addsRouter);
